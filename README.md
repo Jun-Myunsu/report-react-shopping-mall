@@ -24,16 +24,12 @@ npm install
 ## 2) Firebase 설정
 1. Firebase 콘솔에서 프로젝트 생성 → Web App 추가.
 2. Authentication → Sign-in method → Email/Password **Enable**.
-3. 프로젝트 설정에서 Web App config를 복사해서 루트에 `.env.local` 파일을 만들고 다음 값 채우기:
-
-```env
-VITE_FIREBASE_API_KEY=...
-VITE_FIREBASE_AUTH_DOMAIN=...
-VITE_FIREBASE_PROJECT_ID=...
-VITE_FIREBASE_APP_ID=...
-```
-
-(샘플: `.env.example` 참고)
+3. **로컬 개발**: `npm run setup-env` 실행 (더미 데이터 사용)
+4. **배포**: GitHub Repository Settings → Secrets and variables → Actions에서 다음 설정:
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN` 
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_APP_ID`
 
 ## 3) 개발 서버 실행
 ```bash

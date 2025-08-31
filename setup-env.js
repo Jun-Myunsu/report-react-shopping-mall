@@ -10,12 +10,12 @@ const getEnvFromRemote = async () => {
   // const response = await fetch('https://your-config-service.com/config');
   // return await response.json();
 
-  // Firebase 설정 정보
+  // 로컬 개발용 더미 데이터 (실제 배포는 GitHub Secrets 사용)
   return {
-    VITE_FIREBASE_API_KEY: "",
-    VITE_FIREBASE_AUTH_DOMAIN: "",
-    VITE_FIREBASE_PROJECT_ID: "",
-    VITE_FIREBASE_APP_ID: "",
+    VITE_FIREBASE_API_KEY: "demo-api-key",
+    VITE_FIREBASE_AUTH_DOMAIN: "demo-project.firebaseapp.com",
+    VITE_FIREBASE_PROJECT_ID: "demo-project",
+    VITE_FIREBASE_APP_ID: "demo-app-id",
   };
 };
 
