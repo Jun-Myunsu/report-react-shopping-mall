@@ -16,7 +16,6 @@ export default function ProductsPage() {
 
   const applyFilter = (cat: string) => {
     dispatch(setCategoryFilter(cat))
-    dispatch(fetchProducts({ category: cat }))
   }
 
   return (

@@ -25,13 +25,14 @@ export const fetchCategories = createAsyncThunk<string[]>(
 )
 
 type State = {
+  allItems: Product[]
   items: Product[]
   categories: string[]
   status: 'idle' | 'loading' | 'failed'
   categoryFilter: string
 }
 
-const initialState: State = { items: [], categories: [], status: 'idle', categoryFilter: 'all' }
+const initialState: State = { allItems: [], items: [], categories: [], status: 'idle', categoryFilter: 'all' }
 
 const slice = createSlice({
   name: 'products',
@@ -39,12 +40,27 @@ const slice = createSlice({
   reducers: {
     setCategoryFilter(state, action) {
       state.categoryFilter = action.payload
+      // 클라이언트 사이드 필터링
+      if (action.payload === 'all') {
+        state.items = state.allItems
+      } else {
+        state.items = state.allItems.filter(item => item.category === action.payload)
+      }
     }
   },
   extraReducers: builder => {
     builder
       .addCase(fetchProducts.pending, (s) => { s.status = 'loading' })
-      .addCase(fetchProducts.fulfilled, (s, a) => { s.status = 'idle'; s.items = a.payload })
+      .addCase(fetchProducts.fulfilled, (s, a) => { 
+        s.status = 'idle'
+        s.allItems = a.payload
+        // 현재 필터에 따라 items 설정
+        if (s.categoryFilter === 'all') {
+          s.items = a.payload
+        } else {
+          s.items = a.payload.filter(item => item.category === s.categoryFilter)
+        }
+      })
       .addCase(fetchProducts.rejected, (s) => { s.status = 'failed' })
       .addCase(fetchCategories.fulfilled, (s, a) => { s.categories = a.payload })
   }

@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "setup-env": "node setup-env.js",
+    "dev": "npm run setup-env && vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
